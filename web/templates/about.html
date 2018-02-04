@@ -1,0 +1,52 @@
+{% extends "components/layout.html" %}
+{% block content %}
+    <div id="about-page" class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="thumb">
+                    <img src="/static/avatars/club-1.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {% for row in content %}
+                    {% if loop.cycle(True, False) %}
+                        <div class="row card context-left">
+                            <div class="col-xs-12">
+                                <div class="col-lg-4">
+                                    <div class="thumb" style="height: 200px;">
+                                        <img src="{{ row.image }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <h1>{{ row.header }}</h1>
+                                    <p class="paragraph-block">{{ row.body }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row card context-right">
+                            <div class="col-xs-12">
+                                <div class="col-lg-4 hidden-lg-up">
+                                    <div class="thumb" style="height: 200px;">
+                                        <img src="{{ row.image }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <h1>{{ row.header }}</h1>
+                                    <p class="paragraph-block">{{ row.body }}</p>
+                                </div>
+                                <div class="col-lg-4 hidden-md-down">
+                                    <div class="thumb" style="height: 200px;">
+                                        <img src="{{ row.image }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

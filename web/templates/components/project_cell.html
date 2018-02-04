@@ -1,0 +1,291 @@
+{# Tablet-Desktop-HD Desktop #}
+<div class="row card project-banner hidden-sm-down">
+    <div class="col-lg-9 project-banner-img">
+        <img class="img-fluid" src="/static/images/projects/{{ project.title.lower() }}/banner.jpg">
+        <h1 class="project-banner-headline">{{ project.title }}</h1>
+        <div class="project-cell">
+            <h3>{{ project.post }}</h3>
+            <p class="status">{{ project.status }}</p>
+        </div>
+        <a class="link" href="{{ url_for("view_project", project=project.id) }}"></a>
+    </div>
+    <div class="col-lg-3 project-banner-description">
+        <div id="project-cell-content-picker">
+            <h4>Description</h4>
+            <p>{{ project.description_short }}</p>
+        </div>
+    </div>
+</div>
+
+{# Phone landscape sm #}
+<div id="device-phone" class="row card project-banner hidden-md-up hidden-xs-down">
+    <div class="col-sm-12">
+        <div class="row project-headline">
+            <div class="col-sm-8 project-banner-img">
+                <img class="img-fluid" src="/static/images/projects/{{ project.title.lower() }}/banner.jpg">
+                <h1 class="project-banner-headline">{{ project.title }}</h1>
+                <a class="link" href="{{ url_for("view_project", project=project.id) }}"></a>
+            </div>
+            <div class="col-sm-4">
+                <p>Members</p>
+                <div class="member">
+                    {% if project.members | length > 0 %}
+                        {% for member in project.members %}
+                            <p>{{ member.name }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <span>no participating members</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row project-status">
+            <div class="col-sm-12">
+                <span>{{ project.status }}</span>
+            </div>
+        </div>
+        <div class="row project-post">
+            <div class="col-sm-12">
+                <p class="header">Most recent post</p>
+                <p>{{ project.post or "Nothing to report" }}</p>
+            </div>
+        </div>
+        <div class="row project-description">
+            <div class="col-sm-12">
+                <p>{{ project.description_short }}</p>
+            </div>
+        </div>
+        <div class="row show-more">
+            <div class="col-sm-12">
+                <a data-toggle="collapse" href="#p{{ project.id }}-collapse-landscape" aria-expanded="false" aria-controls="collapseExample">
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">Show More</span>
+                </a>
+                <div class="collapse" id="p{{ project.id }}-collapse-landscape">
+                    <div class="images">
+                        <p class="header">Images</p>
+                        {% set projectId = "p" + project.id | string + "-collapse-landscape-carousel" %}
+                        <div class="carousel slide" id="{{ projectId }}" data-ride="pause">
+                            {% set nPages = project.images | length / 3 %}
+                            {% if nPages > 0 %}
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#{{ projectId }}" data-slide-to="0"></li>
+                                    {% for page in range(1, pages) %}
+                                        <li data-target="#{{ projectId }}" data-slide-to="{{ page }}"></li>
+                                    {% endfor %}
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    {% for page in range(nPages) %}
+                                        <div class="carousel-item{% if page == 0 %} active{% endif %}">
+                                            <div class="row">
+                                                {# TODO Fix This #}
+{#                                                {% set index = 3 * page %}#}
+{#                                                {% while index < 3 + (page * 3) and index < project.images | length %}#}
+{#                                                    {% set image = project.images[index] %}#}
+{#                                                    {% set src = "/static/images/projects/" + project.title.lower() + "/images/" + image %}#}
+{#                                                    <div class="col-sm-4">#}
+{#                                                        <a href="/static/images/projects/{{ project.title.lower() }}/images/{{ image }}" class="figure card">#}
+{#                                                            <figure>#}
+{#                                                                <img class="figure-img img-fluid rounded" src="/static/images/projects/{{ project.title.lower() }}/images/{{ image }}">#}
+{#                                                                <figcaption class="figure-caption">{{ image }}</figcaption>#}
+{#                                                            </figure>#}
+{#                                                        </a>#}
+{#                                                    </div>#}
+{#                                                    {% set index = index + 1 %}#}
+{#                                                {% endwhile %}#}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="left carousel-control" href="#{{ projectId }}" role="button" data-slide="prev"></a>
+                                <a class="right carousel-control" href="#{{ projectId }}" role="button" data-slide="next"></a>
+                            {% else %}
+                                <span>no images</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="position-requests">
+                        {% if project.areaRequests | length > 0 %}
+                            <table class="table">
+                                <tbody>
+                                    {% for request in project.areaRequests %}
+                                        <tr>
+                                            <td class="title">
+                                                <a href="{{ url_for("view_project", project=project.id) + "#areaRequest-list" }}">
+                                                    {{ request.title }}
+                                                </a>
+                                            </td>
+                                            {% set assets = [] %}
+                                            {% for asset in request.assets %}
+                                                {{ assets.append(asset.title + "— level " + asset.experience + "\n") }}
+                                            {% endfor %}
+                                            <td title="{{ assets }}" style="background-color: {{ request.project_interest_color }}">
+                                                positions{% if request.position | length > 1 %}s{% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>no current requests at this moment</span>
+                        {% endif %}
+                    </div>
+                    <div class="events">
+                        <p class="header">Events</p>
+                        {% if project.events | length > 0 %}
+                            <table class="table">
+                                <tbody>
+                                    {% for event in project.events %}
+                                        <tr>
+                                            <td class="title">
+                                                <a href="{{ url_for("events", event=event.id) }}">{{ event.title }}</a>
+                                            </td>
+                                            <td>{{ event.date_range }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>no listed events</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{# Phone xs #}
+<div id="device-phone" class="row card project-banner hidden-sm-up">
+    <div class="col-xs-12">
+        <div class="row project-headline">
+            <div class="col-xs-12 project-banner-img">
+                <img class="img.fluid" src="/static/images/projects/{{ project.title.lower() }}/banner.jpg">
+                <h1 class="project-banner-headline">{{ project.title }}</h1>
+                <a class="link" href="/projects/{{ project.id }}"></a>
+            </div>
+        </div>
+        <div class="row project-status">
+            <div class="col-xs-12">
+                <span>{{ project.status }}</span>
+            </div>
+        </div>
+        <div class="row project-members">
+            <div class="col-xs-12">
+                <p class="header">Members</p>
+                <div class="member">
+                    {% if project.members | length > 0 %}
+                        {% for member in project.members %}
+                            <p>member.name</p>
+                        {% endfor %}
+                    {% else %}
+                        <span>no participating members</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row project-post">
+            <div class="col-xs-12">
+                <p class="header">Most recent post</p>
+                <p>{{ project.post or "nothing to report" }}</p>
+            </div>
+        </div>
+        <div class="row project-description">
+            <div class="col-xs-12">
+                <p>project.description_short</p>
+            </div>
+        </div>
+        <div class="row show-more">
+            <div class="col-sm-12">
+                <a data-toggle="collapse" href="#p{{ project.id }}-collapse" aria-expanded="false" aria-controls="collapseExample">
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">show more</span>
+                </a>
+                <div class="collapse" id="p{{ project.id }}-collapse">
+                    <div class="images">
+                        <p class="header">Images</p>
+                        {% set projectId = "p" + project.id | string + "-collapse-carousel" %}
+                        <div class="carousel slide" id="{{ projectId }}" data-ride="pause">
+                            {% set nPages = project.images | length %}
+                            {% if nPages > 0 %}
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#{{ projectId }}" data-slide-to="0"></li>
+                                    {% for page in range(1, nPages) %}
+                                        <li data-target="#{{ projectId }}" data-slide-to="{{ page }}"></li>
+                                    {% endfor %}
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    {% for page in range(nPages) %}
+                                        <div class="carousel-item">
+                                            <div class="row">
+                                                {% set image = project.images[page] %}
+                                                {% set src = "/static/images/projects/" + project.title.lower() + "/images/" + image %}
+                                                <div class="col-xs-12">
+                                                    <a class="figure card" href="{{ src }}">
+                                                        <figure>
+                                                            <img class="figure-img img-fluid rounded" src="{{ src }}">
+                                                            <figcaption class="figure-caption">{{ image }}</figcaption>
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="left carousel-control" href="#{{ projectId }}" role="button" data-slide="prev"></a>
+                                <a class="right carousel-control" href="#{{ projectId }}" role="button" data-slide="next"></a>
+                            {% else %}
+                                <span>no images</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="position-requests">
+                        <p class="header">Position Requests</p>
+                        {% if project.areaRequests | length > 0 %}
+                            <table class="table">
+                                <tbody>
+                                    {% for request in project.areaRequests %}
+                                        <tr>
+                                            <td class="title">
+                                                <a href="{{ url_for("view_project", project=project.id) }}#areaRequest-list">
+                                                    {{ request.title }}
+                                                </a>
+                                            </td>
+                                            {# TODO Tooltips/Popovers #}
+                                            {% set assets = [] %}
+                                            {% set assets = [] %}
+                                            {% for asset in request.assets %}
+                                                {{ assets.append(asset.title + "— level " + asset.experience + "\n") }}
+                                            {% endfor %}
+                                            <td title="{{ assets }}" style="background-color: {{ request.project_interest_color }}">
+                                                position{% if request.nPositions > 1 %}s{% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>no current requests at this moment</span>
+                        {% endif %}
+                    </div>
+                    <div class="events">
+                        <p class="header">Events</p>
+                        {% if project.events | length > 0 %}
+                            <table class="table">
+                                <tbody>
+                                    {% for event in project.events %}
+                                        <tr>
+                                            <td class="title">
+                                                <a href="{{ url_for("events", event=event.id) }}">{{ event.title }}</a>
+                                            </td>
+                                            <td>{{ event.date_range }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>no listed events</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

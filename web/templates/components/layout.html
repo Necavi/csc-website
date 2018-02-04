@@ -1,0 +1,24 @@
+{% set title = "CS Club" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock scripts %}
+</head>
+<body>
+    {% include "components/navbar.html" with context %}
+    <div class="container-fluid">
+        <div class="starter-template">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+    {% include "components/footer.html" %}
+</body>
+</html>

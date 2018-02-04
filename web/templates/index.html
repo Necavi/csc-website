@@ -1,0 +1,60 @@
+{% extends "components/layout.html" %}
+{% block content %}
+    <div id="index-page" class="content">
+        <div id="top-news" class="row">
+            <div class="col-lg-12">
+                <h1>Top News</h1>
+                <span>August 17, 2017</span>
+                <div class="row card">
+                    <div class="col-xs-12">
+                        <h2>Welcome Day</h2>
+                        <span>Join as in the quad for Santa Rosa Junior College's Welcome Day.
+                            Check out what we got from bots to a beta testing video game,
+                            <a href="{{ url_for("view_project", project=11) }}">Space Junkies</a>.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="join" class="row">
+            <div class="col-sm-12">
+                <div class="row card">
+                    <div class="col-sm-12">
+                        <h1>Want to join the club?</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 card">
+                        <a href="#news-bar" class="col-sm-12">
+                            <img class="img-fluid" src="/static/images/icons/maggini-icon-bnr.png">
+                            <h3>Attend a meeting</h3>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 card">
+                        <a href="{{ url_for("contact") }}" class="col-sm-12">
+                            <img class="img-fluid" src="/static/images/icons/slack-icon-bnr.png">
+                            <h3>Signup</h3>
+                        </a>
+                    </div>
+                </div>
+                <div class="row card">
+                    <div class="col-sm-12">
+                        <h2>Done!</h2>
+                        <p>Once joined, you will be informed about <a href="{{ url_for("list_projects") }}">projects</a></p>
+                        <p class="small">No real requirements to join, internet is a plus though :)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="project-spotlight" class="row">
+            <div class="col-lg-12">
+                <h1>Project Spotlight</h1>
+                {% for project in projects %}
+                    {% include "components/project_cell.html" %}
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock content %}

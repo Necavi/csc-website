@@ -1,0 +1,93 @@
+<div id="footer">
+    <div class="foot-wrapper-1">
+        <div class="row links">
+            <div class="col-md-4">
+                <p>Projects</p>
+                <ul>
+                    {% set projects = [[1, "CS Website"], [12, "Jumpnotes"], [7, "SRJC Scheduler"], [5, "Line Follower"]] %}
+                    {% for id, project in projects %}
+                        <li>
+                            <a href="{{ url_for("view_project", project=project) }}">{{ project }}</a>
+                        </li>
+                    {% endfor %}
+                    <li>
+                        <a href="{{ url_for("list_projects") }}">List of projects...</a>
+                    </li>
+                </ul>
+                <p>
+                    <a href="{{ url_for("events") }}">Events</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <p>Members</p>
+                <ul>
+                    <li>
+                        <a href="{{ url_for("view_member", member=12) }}">President</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("view_member", member=14) }}">Vice-President</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("view_member", member=20) }}">Treasurer</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("view_member", member=2) }}">Secretary</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("list_members") }}">List of Club Members...</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <p>Quick Links</p>
+                <ul>
+                    <li>
+                        <a href="{{ url_for("index") }}">Homepage</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("list_projects") }}">Projects Page</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("list_members") }}">Members Page</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("events") }}">Events Page</a>
+                    </li>
+                    <li>
+                        Contact Us Page
+                    </li>
+                    <li>
+                        <a href="{{ url_for("about") }}">About Page</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="foot-wrapper-2">
+        <div class="row news-bar" id="news-bar">
+            <div class="col-sm-12">
+                <a href="https://drive.google.com/file/d/0B3wyRcLxpH4jb1MwdjVmVk9LSWM/view?usp=sharing" target="_blank">
+                    This week's meeting: Fridays at 1:00pm in room 2802 of Maggini Hall.
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="foot-wrapper-3">
+        <div class="row news-subbar">
+            <div class="col-sm-12">
+                <p>
+                    <a href="https://docs.google.com/document/d/1lTRiFQDxTOiiQJqtSkgfnDsAA7HXh3VfgJM3XyjPOfo/pub" target="_blank">
+                        Here is last week's minutes
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="foot-wrapper-4">
+        <div class="row about">
+            <div class="col-sm-12">
+                <h4>About this site</h4>
+            </div>
+        </div>
+    </div>
+</div>

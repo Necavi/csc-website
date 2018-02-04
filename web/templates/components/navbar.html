@@ -1,0 +1,51 @@
+{% macro display_links(links) %}
+    {% for name, endpoint in links %}
+        <li class="nav-item{% if not endpoint.startswith("#") and name == current_page %} active{% endif %}">
+            <a class="nav-link" href="{% if endpoint.startswith("#") %}{{ endpoint }}{% else %}{{ url_for(endpoint) }}{% endif %}">{{ name }}</a>
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+<div class="hidden-sm-down">
+    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+        <div class="nbw2">
+            <div class="navbar-wrapper">
+                <a class="navbar-brand" href="{{ url_for("index") }}">{{ title }}</a>
+                <ul class="nav navbar-nav pull-xs-right">
+                    {{ display_links(pages) }}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="hidden-md-up">
+    <nav class="navbar-mobile navbar-fixed-top navbar-dark bg-inverse">
+        <div class="nbw2">
+            <div class="navbar-wrapper">
+                <a href="{{ url_for("index") }}">
+                    <img class="thumb" src="/static/images/icons/logo-64@2x.png" style="width: 52px; height: 52px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar-collapse"
+                        aria-controls="navBar-collapse" aria-expanded="false" aria-label="navBar-control">
+                    <span aria-hidden="false" class="glyphicon glyphicon-menu-hamburger">Menu</span>
+                </button>
+                <div class="navbar-mobile-secondary collapse" id="navBar-collapse">
+                    {{ display_links(pages) }}
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="hidden-sm-down">
+    <nav class="navbar navbar-fixed-top navbar-dark navbar-secondary">
+        <div class="nbw2">
+            <div class="navbar-wrapper">
+                <ul class="nav navbar-nav pull-xs-right">
+                    {% if secondary_pages is defined %}
+                    {{ display_links(secondary_pages) }}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

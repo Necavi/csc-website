@@ -1,0 +1,44 @@
+{% extends "components/layout.html" %}
+{% block content %}
+    <div id="resources-page" class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <a class="cell" href="{{ url_for("tutorials") }}">
+                    <div class="context">
+                        <img src="/static/images/icons/resources-tutorials.png">
+                        <h2>Tutorials</h2>
+                    </div>
+                </a>
+                <p>
+                    Learn and understand the technolgies used in projects to best jump into a working project! Links to
+                    resources, recommended videos and playlists, as well as download source code can all be found here
+                </p>
+            </div>
+            <div class="col-md-4">
+                <div class="cell" href="/resources/programs">
+                    <div class="context">
+                        <img src="/static/images/icons/resources-programs.png">
+                        <h2>Programs</h2>
+                    </div>
+                </div>
+                <p>Find some helpful online programs and Santa Rosa Junior College certificates here.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="cell" href="/resources/capital">
+                    <div class="context">
+                        <img src="/static/images/icons/resources-capital.png">
+                        <h2>Capital</h2>
+                    </div>
+                </div>
+                <p>
+                    Browse through the equipment and resources the club has to offer and make available for our members
+                    to use in projects and services!
+                </p>
+            </div>
+        </div>
+        <span>
+            Administration documents
+            <a href=https://docs.google.com/document/d/1YcBvUbLe0sLiQbxb5ppkPYkQxlLqq3gGalc1NXAFi8M/pub>here</a>
+        </span>
+    </div>
+{% endblock content %}
