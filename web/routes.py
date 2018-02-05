@@ -22,10 +22,11 @@ def view_project(project):
 
 @app.route("/projects")
 def list_projects():
+    projects = Project.query.all()
     list_of_projects = {
-        "top": Project.query.all(),
-        "secondary": [],
-        "archived": []
+        "top": projects[0:2],
+        "secondary": projects[2:5],
+        "archived": projects[5:]
     }
     return render_template("projects.html", current_page="Projects", list_of_projects=list_of_projects)
 
