@@ -1,0 +1,27 @@
+<div class="col-md-12 project-banner primary-project">
+    <div class="row card">
+        <div class="col-lg-12 project-banner-img">
+            <a href="{{ url_for("view_project", project=project.id) }}">
+                <img class="img-fluid" src="/static/images/projects/{{ project.title.lower() }}/banner.jpg">
+            </a>
+            <div class="project-cell">
+                <h3 class="project-cell-status">{{ project.status }}</h3>
+                <p>member{% if project.members | length > 1 %}s{% endif %}</p>
+                <div class="member">
+                    {% for member in project.members %}
+                        <p>member.name</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="project-cell-description">
+                <p>{{ project.description_short }}</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p>most recent post</p>
+        </div>
+        <div class="col-lg-12 project-banner-description card-block">
+            <h1 class="project-headline">{{ project.title }}</h1>
+        </div>
+    </div>
+</div>

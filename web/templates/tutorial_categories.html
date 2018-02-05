@@ -1,0 +1,18 @@
+{% extends "components/layout.html" %}
+{% block content %}
+    <div id="categories-page" class="content">
+        <div class="d-flex justify-content-center">
+            <h2>Categories</h2>
+            {% for category in categories %}
+                <div class="category">
+                    <a class="cell" href="{{ url_for("get_tutorial_category", category=category.id) }}">
+                        <div class="context">
+                            <img src="{{ category.image }}">
+                            <h2>{{ category.title }}</h2>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

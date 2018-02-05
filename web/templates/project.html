@@ -1,0 +1,27 @@
+{% extends "components/layout.html" %}
+{% block content %}
+    <div id="project-page" class="content">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="project-title">
+                    <h1>{{ project.title }} ({{ project.status }})</h1>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <ul class="project-quick-links-container">
+                    {% for link, name in project.links %}
+                        <li>
+                            <a href="{{ link }}">
+                                {% include "components/quick_link_icon.html" %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% include "components/project_page/header.html" %}
+        {% include "components/project_page/team_list.html" %}
+        {% include "components/project_page/area_requests.html" %}
+        {% include "components/project_page/events.html" %}
+    </div>
+{% endblock content %}

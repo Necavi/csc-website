@@ -22,7 +22,12 @@ def view_project(project):
 
 @app.route("/projects")
 def list_projects():
-    return ""
+    list_of_projects = {
+        "top": Project.query.all(),
+        "secondary": [],
+        "archived": []
+    }
+    return render_template("projects.html", current_page="Projects", list_of_projects=list_of_projects)
 
 
 @app.route("/member/<member>")
@@ -86,7 +91,12 @@ def resources():
 
 
 @app.route("/resources/tutorials")
-def tutorials():
+def list_tutorial_categories():
+    return render_template("tutorial_categories.html")
+
+
+@app.route("/resources/tutorials/<int:id>")
+def get_tutorial_category(id):
     return ""
 
 

@@ -1,0 +1,9 @@
+{% for project in list_of_projects.top %}
+    {% include "components/project_cell-detailed-top.html" %}
+{% endfor %}
+{% for project in list_of_projects.secondary %}
+    {% include "components/project_cell-detailed-secondary.html" %}
+{% endfor %}
+{% for project in list_of_projects.archived %}
+    {% include "components/project_cell-detailed-archived.html" %}
+{% endfor %}

@@ -10,7 +10,9 @@
     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
         <div class="nbw2">
             <div class="navbar-wrapper">
-                <a class="navbar-brand" href="{{ url_for("index") }}">{{ title }}</a>
+                <a class="navbar-brand" href="{{ url_for("index") }}">
+                    {{ title }}{% block subbrand %}{% endblock subbrand %}
+                </a>
                 <ul class="nav navbar-nav pull-xs-right">
                     {{ display_links(pages) }}
                 </ul>

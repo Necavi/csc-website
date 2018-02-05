@@ -13,9 +13,21 @@ class Project(db.Model):
     # links = db.Column(db.Integer, db.ForeignKey("link"))
 
 
-# class Milestone(db.Model):
-#
-#
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(32))
+    description = db.Column(db.String(256))
+    image = db.Column(db.String(256))
+    tutorials = db.relationship("Tutorial", back_populates="category")
+
+
+class Tutorial(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"))
+    category = db.relationship("Category", back_populates="tutorials")
+
+
+
 # function Project( id, title, description, description_short, status, post, milestones, links, images )
 # {
 #     this.id = id;

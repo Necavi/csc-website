@@ -1,0 +1,9 @@
+{% extends "components/layout.html" %}
+{% block content %}
+    <div id="projects-page" class="content" ng-controller="ProjectListController">
+        <div id="projects-spotlight" class="row" ng-controller="ProjectListController">
+            {% include "components/project_cell-detailed.html" %}
+        </div>
+        <hr>
+    </div>
+{% endblock content %}
