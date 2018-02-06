@@ -1,0 +1,22 @@
+<h3>Events</h3>
+<div id="#event-list">
+    {% if project.events | length > 0 %}
+        {% for event in project.events %}
+            <a href="{{ url_for("list_events") }}" class="cell row">
+                <div class="context col-xs-12">
+                    <div class="col-xs-8">
+                        <p class="date-range float-xs-right">{{ event.date_range }}</p>
+                        <p class="header">{{ event.title }}</p>
+                        <p class="location">{{ event.location }}</p>
+                        <p>{{ event.description }}</p>
+                    </div>
+                    <div class="col-xs-4 cover-image">
+                        <img src="/static/images/projects/{{ project.title.lower() }}/events/{{ event.media[0].image }}">
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <h4>no listed events</h4>
+    {% endif %}
+</div>

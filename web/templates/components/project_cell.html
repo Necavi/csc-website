@@ -7,7 +7,7 @@
             <h3>{{ project.post }}</h3>
             <p class="status">{{ project.status }}</p>
         </div>
-        <a class="link" href="{{ url_for("view_project", project=project.id) }}"></a>
+        <a class="link" href="{{ url_for("view_project", project=project.slug) }}"></a>
     </div>
     <div class="col-lg-3 project-banner-description">
         <div id="project-cell-content-picker">
@@ -24,7 +24,7 @@
             <div class="col-sm-8 project-banner-img">
                 <img class="img-fluid" src="/static/images/projects/{{ project.title.lower() }}/banner.jpg">
                 <h1 class="project-banner-headline">{{ project.title }}</h1>
-                <a class="link" href="{{ url_for("view_project", project=project.id) }}"></a>
+                <a class="link" href="{{ url_for("view_project", project=project.slug) }}"></a>
             </div>
             <div class="col-sm-4">
                 <p>Members</p>
@@ -57,13 +57,13 @@
         </div>
         <div class="row show-more">
             <div class="col-sm-12">
-                <a data-toggle="collapse" href="#p{{ project.id }}-collapse-landscape" aria-expanded="false" aria-controls="collapseExample">
+                <a data-toggle="collapse" href="#p{{ project.slug }}-collapse-landscape" aria-expanded="false" aria-controls="collapseExample">
                     <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">Show More</span>
                 </a>
-                <div class="collapse" id="p{{ project.id }}-collapse-landscape">
+                <div class="collapse" id="p{{ project.slug }}-collapse-landscape">
                     <div class="images">
                         <p class="header">Images</p>
-                        {% set projectId = "p" + project.id | string + "-collapse-landscape-carousel" %}
+                        {% set projectId = "p" + project.slug | string + "-collapse-landscape-carousel" %}
                         <div class="carousel slide" id="{{ projectId }}" data-ride="pause">
                             {% set nPages = project.images | length / 3 %}
                             {% if nPages > 0 %}
@@ -110,7 +110,7 @@
                                     {% for request in project.areaRequests %}
                                         <tr>
                                             <td class="title">
-                                                <a href="{{ url_for("view_project", project=project.id) + "#areaRequest-list" }}">
+                                                <a href="{{ url_for("view_project", project=project.slug) + "#areaRequest-list" }}">
                                                     {{ request.title }}
                                                 </a>
                                             </td>
@@ -160,7 +160,7 @@
             <div class="col-xs-12 project-banner-img">
                 <img class="img.fluid" src="/static/images/projects/{{ project.title.lower() }}/banner.jpg">
                 <h1 class="project-banner-headline">{{ project.title }}</h1>
-                <a class="link" href="/projects/{{ project.id }}"></a>
+                <a class="link" href="/projects/{{ project.slug }}"></a>
             </div>
         </div>
         <div class="row project-status">
@@ -198,10 +198,10 @@
                 <a data-toggle="collapse" href="#p{{ project.id }}-collapse" aria-expanded="false" aria-controls="collapseExample">
                     <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">show more</span>
                 </a>
-                <div class="collapse" id="p{{ project.id }}-collapse">
+                <div class="collapse" id="p{{ project.slug }}-collapse">
                     <div class="images">
                         <p class="header">Images</p>
-                        {% set projectId = "p" + project.id | string + "-collapse-carousel" %}
+                        {% set projectId = "p" + project.slug | string + "-collapse-carousel" %}
                         <div class="carousel slide" id="{{ projectId }}" data-ride="pause">
                             {% set nPages = project.images | length %}
                             {% if nPages > 0 %}
@@ -244,7 +244,7 @@
                                     {% for request in project.areaRequests %}
                                         <tr>
                                             <td class="title">
-                                                <a href="{{ url_for("view_project", project=project.id) }}#areaRequest-list">
+                                                <a href="{{ url_for("view_project", project=project.slug) }}#areaRequest-list">
                                                     {{ request.title }}
                                                 </a>
                                             </td>

@@ -1,0 +1,29 @@
+{% extends "components/layout.html" %}
+{% macro display_events(event_list, upcoming=True) %}
+    {% for event in event_list %}
+        {% if event.project_id is defined %}
+            {% set link = url_for("project_events", event=event.id) %}
+        {% else %}
+            {% set link = url_for("list_events", event=event.id) %}
+        {% endif %}
+        <a href="{{ link }}" class="cell row event">
+            <div class="context col-xs-12">
+                <p class="float-xs-right">{{ event.date_range }}</p>
+                <h3>{{ event.title }}</h3>
+                {% if upcoming %}
+                    <p>{{ event.description_short }}</p>
+                {% endif %}
+            </div>
+        </a>
+    {% endfor %}
+{% endmacro %}
+{% block content %}
+    <div id="events-page" class="content">
+        <div class="events">
+            <h2>Upcoming Events</h2>
+            {{ display_events(events.upcoming_events) }}
+            <h2>Past Events</h2>
+            {{ display_events(events.past_events, upcoming=False) }}
+        </div>
+    </div>
+{% endblock content %}

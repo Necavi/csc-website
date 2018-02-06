@@ -17,7 +17,7 @@ def index():
 
 @app.route("/projects/<project>")
 def view_project(project):
-    return ""
+    return render_template("project.html", current_page="Projects", project=Project.query.filter_by(slug=project).one())
 
 
 @app.route("/projects")
@@ -48,7 +48,7 @@ def contact():
 
 @app.route("/events")
 def list_events():
-    return ""
+    return render_template("events.html", current_page="Events", events={"upcoming_events": [], "past_events": []})
 
 
 @app.route("/events2")

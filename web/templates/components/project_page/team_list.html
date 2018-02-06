@@ -1,0 +1,29 @@
+<div class="row card">
+    <div class="col-lg-12">
+        <h2>The Team</h2>
+        <div class="row">
+            <div id="atoms" class="col-lg-12">
+                <div class="col-md-6">
+                    <h3>Project Managers</h3>
+                    {% for member in project.team.managers %}
+                        <div class="member-cell">
+                            {% include "components/member-cell.html" %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-6">
+                    <h3>Members</h3>
+                    {% for member in project.team.members %}
+                        <div class="member-cell grid col-2 hidden-md-down">
+                            {% include "components/member-cell.html" %}
+                        </div>
+                        <div class="member-cell hidden-lg-up">
+                            {% include "components/member-cell.html" %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>

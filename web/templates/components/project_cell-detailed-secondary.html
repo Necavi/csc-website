@@ -11,6 +11,6 @@
         <div class="project-headline">
             <h1>{{ project.title }}</h1>
         </div>
-        <a class="link" href="{{ url_for("view_project", project=project.id) }}"></a>
+        <a class="link" href="{{ url_for("view_project", project=project.slug) }}"></a>
     </div>
 </div>

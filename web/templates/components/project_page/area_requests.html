@@ -1,0 +1,32 @@
+<h3>Area Requests</h3>
+<div id="areaRequest-list">
+    {% if project.areaRequests | length > 0 %}
+        {% for request in project.areaRequests %}
+            <div class="cell row">
+                <div class="context col-xs-12">
+                    <div class="col-xs-8">
+                        <p style="background-color: {{ request.project_interest_color }}" class="interest pull-xs-right">
+                            {{ request.project_interest_title }}
+                        </p>
+                        <p class="header">{{ request.title }}</p>
+                        <p class="author pull-xs-right">{{ request.author.name }}</p>
+                        <p>{{ request.description }}</p>
+                    </div>
+                    <div class="positions col-xs-4">
+                        <h4>position{% if request.nPositions > 1 %}s{% endif %}</h4>
+                        <hr>
+                        <div class="asset-list">
+                            {% for asset in request.assets %}
+                                <p style="background-color: {{ asset.experience_color }}" class="asset pull-xs-left">
+                                    {{ asset.title }}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h4>no current requests at this moment</h4>
+    {% endif %}
+</div>

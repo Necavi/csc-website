@@ -2,27 +2,47 @@ from . import db
 
 
 class Project(db.Model):
+    def __init__(self, *args, **kwargs):
+        if "slug" not in kwargs:
+            kwargs["slug"] = kwargs["title"].replace(" ", "_").lower()
+        super().__init__(*args, **kwargs)
+
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(128))
+    slug = db.Column(db.String(16), nullable=False, unique=True)
+    title = db.Column(db.String(32), nullable=False)
     description = db.Column(db.Text)
     description_short = db.Column(db.String(256))
     status = db.Column(db.String(32))
     post = db.Column(db.String(128))
     members = []
     images = []
+    team = {"members": [], "managers": []}
     # links = db.Column(db.Integer, db.ForeignKey("link"))
 
 
 class Category(db.Model):
+    def __init__(self, *args, **kwargs):
+        if "slug" not in kwargs:
+            kwargs["slug"] = kwargs["title"].replace(" ", "_").lower()
+        super().__init__(*args, **kwargs)
+
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(32))
+    slug = db.Column(db.String(16), nullable=False, unique=True)
+    title = db.Column(db.String(32), nullable=False)
     description = db.Column(db.String(256))
     image = db.Column(db.String(256))
     tutorials = db.relationship("Tutorial", back_populates="category")
 
 
 class Tutorial(db.Model):
+    def __init__(self, *args, **kwargs):
+        if "slug" not in kwargs:
+            kwargs["slug"] = kwargs["title"].replace(" ", "_").lower()
+        super().__init__(*args, **kwargs)
+
     id = db.Column(db.Integer, primary_key=True)
+    slug = db.Column(db.String(16), nullable=False, unique=True)
+    title = db.Column(db.String(32), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"))
     category = db.relationship("Category", back_populates="tutorials")
 
