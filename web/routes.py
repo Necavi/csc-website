@@ -38,7 +38,7 @@ def view_member(member):
 
 @app.route("/members")
 def list_members():
-    return ""
+    return render_template("members.html", current_page="Members", members=[])
 
 
 @app.route("/contact")
@@ -96,8 +96,8 @@ def list_tutorial_categories():
     return render_template("tutorial_categories.html")
 
 
-@app.route("/resources/tutorials/<int:id>")
-def get_tutorial_category(id):
+@app.route("/resources/tutorials/<category>")
+def get_tutorial_category(category):
     return ""
 
 

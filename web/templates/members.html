@@ -1,0 +1,93 @@
+{% extends "components/layout.html" %}
+{% block content %}
+    <div id="members-page" class="content">
+        <div id="members-list" class="content">
+            {% for member in members %}
+                {# Tablet-Desktop-HD Desktop #}
+                <div class="row hidden-sm-down">
+                    <div class="col-md-12">
+                        <a href="{{ url_for("view_member", member=member.slug) }}" class="card">
+                            <img class="avatar" src="{{ member.avatar }}" onError="this.src='http://placehold.it/77cb6f'">
+                            {% if member.position is not none %}
+                                <div id="corner-ribbons" class="wrapper">
+                                    <div class="ribbon" style="background-color: {{ member.position.switch }}">
+                                        {{ member.position.title }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="member-info">
+                                <h1 class="member-name">member.name</h1>
+                                {% if member.bio_short is not none %}
+                                    <p>{{ member.bio_short }}</p>
+                                {% endif %}
+                                <p>
+                                    {% if member.numberOfProjects == 0 %}
+                                        Not participating in any projects
+                                    {% else %}
+                                        Participating in {{ member.numberOfProjects }} project{% if member.numberOfProjects > 1 %}s{% endif %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </a>
+                        <div class="quick-links">
+                            {% for link in member.links %}
+                                <a href="{{ link }}" target="_blank" class="links">
+                                    <span>{{ link }}</span>
+                                    <img class="links">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {# sm, xs Phone-and landscape #}
+                <div class="row hidden-sm-down">
+                    <div class="col-md-12">
+                        <div class="quick-links">
+                            {% for link in member.links %}
+                                <a href="{{ link }}" target="_blank" class="links">
+                                    <span>{{ link }}</span>
+                                    <img class="links">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {# sm, xs Phone-and landscape #}
+                <div id="device-phone" class="row hidden-md-up">
+                    <div class="col-sm-12">
+                        <a href="{{ get_url("view_member", member=member.slug) }}" class="card">
+                            <img class="avatar" src="{{ member.avatar }}" onError="this.src='http://placehold.it/77cb6f'">
+                            <h1 class="member.name">{{ member.name }}</h1>
+                            {% if member.position is not none %}
+                                <div id="corner-ribbons" class="wrapper">
+                                    <div class="ribbon-wrapper">
+                                        <div class="ribbon" style="background-color: {{ member.position.switch }}">
+                                            {{ member.position.title }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if member.bio_short is not none %}
+                                <p>{{ member.bio_short }}</p>
+                            {% endif %}
+                            <p class="hidden-sm-down">
+                                {% if member.numberOfProjects == 0 %}
+                                    Not participating in any projects
+                                {% else %}
+                                    Participating in {{ member.numberOfProjects }} project{% if member.numberOfProjects > 1 %}s{% endif %}
+                                {% endif %}
+                            </p>
+                        </a>
+                        <div class="quick-links">
+                            {% for link in member.links %}
+                                <a href="{{ link }}" target="_blank" class="links">
+                                    <img class="links">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
